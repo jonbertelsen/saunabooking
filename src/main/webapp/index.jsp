@@ -35,7 +35,7 @@
                                 <strong>${e.eventName}</strong><br/>
                                 ${e.locationName} i ${e.city}</br>
                                 ${e.limit - e.count} ledige pladser</p>
-                            <p> ${e.}
+                            <p>
                                 <button class="btn btn-primary"
                                         name="eventid"
                                         value="${e.eventId}"
