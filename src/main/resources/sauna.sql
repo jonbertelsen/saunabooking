@@ -31,7 +31,7 @@ DROP TABLE IF EXISTS `booking`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `booking` (
-  `booking_id` int NOT NULL,
+  `booking_id` int NOT NULL AUTO_INCREMENT,
   `customer_id` int NOT NULL,
   `event_id` int NOT NULL,
   `confirmation` tinyint NOT NULL DEFAULT '0',
@@ -42,7 +42,7 @@ CREATE TABLE `booking` (
   KEY `fk_booking_event1_idx` (`event_id`),
   CONSTRAINT `fk_booking_customer1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`),
   CONSTRAINT `fk_booking_event1` FOREIGN KEY (`event_id`) REFERENCES `event` (`event_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -51,6 +51,7 @@ CREATE TABLE `booking` (
 
 LOCK TABLES `booking` WRITE;
 /*!40000 ALTER TABLE `booking` DISABLE KEYS */;
+INSERT INTO `booking` VALUES (1,1,1,0,1,'2022-03-31 00:22:35'),(2,1,2,0,2,'2022-03-31 10:47:33');
 /*!40000 ALTER TABLE `booking` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -67,7 +68,7 @@ CREATE TABLE `customer` (
   `name` varchar(45) DEFAULT NULL,
   `created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`customer_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -76,6 +77,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
+INSERT INTO `customer` VALUES (1,'22755844','Jon Bertelsen','2022-03-31 00:21:31');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -106,9 +108,56 @@ CREATE TABLE `event` (
 
 LOCK TABLES `event` WRITE;
 /*!40000 ALTER TABLE `event` DISABLE KEYS */;
-INSERT INTO `event` VALUES (1,'Saunafestival #1',60,165,10,'2022-05-05 12:00:00',1),(2,'Saunafestival #2',60,165,10,'2022-05-05 13:00:00',1),(3,'Saunafestival #3',60,165,10,'2022-05-05 14:00:00',1),(4,'Saunafestival #4',60,165,10,'2022-05-06 10:00:00',1),(5,'Saunafestival #5',60,165,10,'2022-05-06 11:00:00',1),(6,'Saunafestival #6',60,165,10,'2022-05-06 12:00:00',1),(7,'Hasle gus #1',60,165,10,'2022-04-06 18:00:00',1),(8,'Hasle gus #2',60,165,10,'2022-04-06 19:00:00',1),(9,'Sandvig gus galore #1',60,200,10,'2022-04-17 16:00:00',1),(10,'Sandvig gus galore #2',60,200,10,'2022-04-17 17:30:00',1);
+INSERT INTO `event` VALUES (1,'Saunafestival #1',60,165,10,'2022-05-05 12:00:00',1),(2,'Saunafestival #2',60,165,10,'2022-05-05 13:00:00',1),(3,'Saunafestival #3',60,165,10,'2022-05-05 14:00:00',1),(4,'Saunafestival #4',60,165,10,'2022-05-06 10:00:00',1),(5,'Saunafestival #5',60,165,10,'2022-05-06 11:00:00',1),(6,'Saunafestival #6',60,165,10,'2022-05-06 12:00:00',1),(7,'Hasle gus #1',60,165,10,'2022-04-06 18:00:00',2),(8,'Hasle gus #2',60,165,10,'2022-04-06 19:00:00',2),(9,'Sandvig gus galore #1',60,200,10,'2022-04-17 16:00:00',3),(10,'Sandvig gus galore #2',60,200,10,'2022-04-17 17:30:00',3);
 /*!40000 ALTER TABLE `event` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Temporary view structure for view `event_count_view`
+--
+
+DROP TABLE IF EXISTS `event_count_view`;
+/*!50001 DROP VIEW IF EXISTS `event_count_view`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `event_count_view` AS SELECT 
+ 1 AS `event_id`,
+ 1 AS `event_name`,
+ 1 AS `duration`,
+ 1 AS `price`,
+ 1 AS `limit`,
+ 1 AS `time`,
+ 1 AS `location_id`,
+ 1 AS `location_name`,
+ 1 AS `address`,
+ 1 AS `zip`,
+ 1 AS `city`,
+ 1 AS `gmap_link`,
+ 1 AS `count`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `event_view`
+--
+
+DROP TABLE IF EXISTS `event_view`;
+/*!50001 DROP VIEW IF EXISTS `event_view`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `event_view` AS SELECT 
+ 1 AS `event_id`,
+ 1 AS `event_name`,
+ 1 AS `duration`,
+ 1 AS `price`,
+ 1 AS `limit`,
+ 1 AS `time`,
+ 1 AS `location_id`,
+ 1 AS `address`,
+ 1 AS `zip`,
+ 1 AS `city`,
+ 1 AS `location_name`,
+ 1 AS `gmap_link`*/;
+SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `location`
@@ -134,7 +183,7 @@ CREATE TABLE `location` (
 
 LOCK TABLES `location` WRITE;
 /*!40000 ALTER TABLE `location` DISABLE KEYS */;
-INSERT INTO `location` VALUES (1,'Hammergus','Shelterplads Hammeersø',3770,'Allinge','https://goo.gl/maps/5h883VbCvZ3Kw9Ua8'),(2,'Haslegus','Havnen 25 b',3790,'Hasle','https://goo.gl/maps/hdeWq3G2uyX3qG757'),(3,'Sandvig-gus','Strandpromenaden 20',3770,'Allinge','https://goo.gl/maps/iUthiWtcfVFQvPj96');
+INSERT INTO `location` VALUES (1,'Hammergus','Shelterplads Hammersø',3770,'Allinge','https://goo.gl/maps/5h883VbCvZ3Kw9Ua8'),(2,'Haslegus','Havnen 25 b',3790,'Hasle','https://goo.gl/maps/hdeWq3G2uyX3qG757'),(3,'Sandvig-gus','Strandpromenaden 20',3770,'Allinge','https://goo.gl/maps/iUthiWtcfVFQvPj96');
 /*!40000 ALTER TABLE `location` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -194,6 +243,54 @@ LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Current Database: `sauna`
+--
+
+USE `sauna`;
+
+--
+-- Final view structure for view `event_count_view`
+--
+
+/*!50001 DROP VIEW IF EXISTS `event_count_view`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`%` SQL SECURITY DEFINER */
+/*!50001 VIEW `event_count_view` AS select `eventjoin`.`event_id` AS `event_id`,`eventjoin`.`event_name` AS `event_name`,`eventjoin`.`duration` AS `duration`,`eventjoin`.`price` AS `price`,`eventjoin`.`limit` AS `limit`,`eventjoin`.`time` AS `time`,`eventjoin`.`location_id` AS `location_id`,`eventjoin`.`location_name` AS `location_name`,`eventjoin`.`address` AS `address`,`eventjoin`.`zip` AS `zip`,`eventjoin`.`city` AS `city`,`eventjoin`.`gmap_link` AS `gmap_link`,ifnull(`eventjoin`.`count`,0) AS `count` from (select `event_view`.`event_id` AS `event_id`,`event_view`.`event_name` AS `event_name`,`event_view`.`duration` AS `duration`,`event_view`.`price` AS `price`,`event_view`.`limit` AS `limit`,`event_view`.`time` AS `time`,`event_view`.`location_id` AS `location_id`,`event_view`.`address` AS `address`,`event_view`.`zip` AS `zip`,`event_view`.`city` AS `city`,`event_view`.`location_name` AS `location_name`,`event_view`.`gmap_link` AS `gmap_link`,`e`.`count` AS `count` from (`event_view` left join (select `booking`.`event_id` AS `event_id`,sum(`booking`.`quantity`) AS `count` from `booking` group by `booking`.`event_id`) `e` on((`event_view`.`event_id` = `e`.`event_id`)))) `eventjoin` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `event_view`
+--
+
+/*!50001 DROP VIEW IF EXISTS `event_view`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`%` SQL SECURITY DEFINER */
+/*!50001 VIEW `event_view` AS select `e`.`event_id` AS `event_id`,`e`.`name` AS `event_name`,`e`.`duration` AS `duration`,`e`.`price` AS `price`,`e`.`limit` AS `limit`,`e`.`time` AS `time`,`l`.`location_id` AS `location_id`,`l`.`address` AS `address`,`l`.`zip` AS `zip`,`l`.`city` AS `city`,`l`.`name` AS `location_name`,`l`.`gmap_link` AS `gmap_link` from (`event` `e` join `location` `l` on((`e`.`location_id` = `l`.`location_id`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Current Database: `sauna_test`
+--
+
+USE `sauna_test`;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -204,4 +301,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-03-30 22:21:42
+-- Dump completed on 2022-04-01 18:47:43
